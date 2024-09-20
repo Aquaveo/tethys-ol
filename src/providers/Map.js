@@ -28,9 +28,11 @@ export const Map = ({ children, ...props}) => {
     };
     
     let mapObject = new OlMap(options);
-    
+
+    console.log(props.events)
+    mapObject.on('click', props.events.click);
+
     mapObject.setTarget(mapRef.current);
-    
     setMap(mapObject);
 
     return () => mapObject.setTarget(undefined);

@@ -34,6 +34,9 @@ const zoomToLayerbyName = (map, layerName) => {
 }   
 
 
+
+
+
 export {
     getAllLayerNames,
     zoomToLayer,

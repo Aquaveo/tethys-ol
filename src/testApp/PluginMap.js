@@ -1,55 +1,49 @@
 import React from "react";
-import { fromLonLat } from "ol/proj";
-import "ol/ol.css";
+
 import { Map } from "../tethys-ol/providers/Map";
 import Layer from "../tethys-ol/components/layers/Layer";
-// import Source from "../tethys-ol/lib/sources/Source";
 import Source from "../tethys-ol/lib/Source";
-import MapEvents from "./mapEvents";
 import Layers from "../tethys-ol/components/layers/Layers";
-import { layerConfigs } from "./LayerConfig";
 
-const mapEvents = new MapEvents();
+import { 
+    LayerConfig, 
+    ViewConfig, 
+    MapConfig 
+} from "./Config";
 
-const center = fromLonLat([-110.875, 37.345]);
-
+import View from "../tethys-ol/components/View";
 
 
 const PluginMap = () => {
     
   return (
     <Map
-        center={center}
-        zoom={5}
-        className="ol-map"
-        width="100%"
-        height="100vh"
-        events={{
-            click: (evt)=>{
-                mapEvents.onClickMapEvent(evt)
-            }
-        }}
+        {...MapConfig}
     >
-      <Layers>
-      {layerConfigs.map((config, index) => {
-        const { type: LayerType, props: { source: { type: SourceType, props: sourceProps }, ...layerProps } } = config;
-        const source = Source({ is: SourceType, ...sourceProps });
-        return (
-            <Layer 
-            key={index} 
-            is={LayerType}
-            source={source}
-            {...layerProps}
-            />
-        );
-        })}
-      </Layers>
+        <View
+            {...ViewConfig}
+        />
+
+        <Layers>
+            {LayerConfig.map((config, index) => {
+                const { type: LayerType, props: { source: { type: SourceType, props: sourceProps }, ...layerProps } } = config;
+                const source = Source({ is: SourceType, ...sourceProps });
+                return (
+                    <Layer 
+                        key={index} 
+                        is={LayerType}
+                        source={source}
+                        {...layerProps}
+                    />
+                );
+            })}
+        </Layers>
 
     </Map>
   );
 }
 
-export {PluginMap}
+export default PluginMap
 
 
 

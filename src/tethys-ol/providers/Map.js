@@ -9,19 +9,23 @@ export const Map = ({ children, ...props}) => {
 
   useEffect(() => {
     let options = {
-      view: new View({ 
-        zoom: props.resolution === undefined ? props.zoom : undefined, 
-        center: props.center,
-        extent: props.extent,
-        resolution: props.resolution,
-        minResolution: props.minResolution,
-        maxResolution: props.maxResolution,
-        constrainResolution: props.constrainResolution,
-        minZoom: props.minZoom,
-        maxZoom: props.maxZoom,
-        enableRotation: props.enableRotation,
-        constrainRotation: props.constrainRotation
+      view: new View({
+        center: [0, 0],
+        zoom: 1,
       }),
+        // new View({
+        //   zoom: props.resolution === undefined ? props.zoom : undefined, 
+        //   center: props.center,
+        //   extent: props.extent,
+        //   resolution: props.resolution,
+        //   minResolution: props.minResolution,
+        //   maxResolution: props.maxResolution,
+        //   constrainResolution: props.constrainResolution,
+        //   minZoom: props.minZoom,
+        //   maxZoom: props.maxZoom,
+        //   enableRotation: props.enableRotation,
+        //   constrainRotation: props.constrainRotation
+        // }),
       layers: [],
       controls: [],
       overlays: []
@@ -44,7 +48,7 @@ export const Map = ({ children, ...props}) => {
         <div 
           ref={mapRef} 
           className= {props.className}
-          style={{width: props.width, height: props.height}}
+          style={props.style}
         >
           {children}
         </div>

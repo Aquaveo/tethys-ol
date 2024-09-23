@@ -1,23 +1,18 @@
+import Layer from 'ol/layer/WebGLTile.js';
 import { useEffect } from 'react';
 import { useMapContext } from '../../hooks/useMapContext';
-import ImageLayer from 'ol/layer/Image.js';
-
 import { useMap } from '../../hooks/useMap';
 
-
-
-const ImageLayerWrapper = ({ params }) => {
-
-    const {map} = useMapContext();
+const WebGLTile = (props) => {
+    const { map } = useMapContext();
     const { addLayer, removeLayer } = useMap(map);
-    
-    console.log(params);
+
     useEffect(() => {
         if (!map) return;
-        const layer = new ImageLayer({
-            ...params
+        const layer = new Layer({
+            ...props
         });
-        console.log(layer);
+
         addLayer(layer);
         
         return () => {
@@ -28,4 +23,5 @@ const ImageLayerWrapper = ({ params }) => {
 
 };
 
-export { ImageLayerWrapper };
+export default WebGLTile;
+

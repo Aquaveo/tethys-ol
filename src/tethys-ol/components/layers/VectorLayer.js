@@ -1,16 +1,19 @@
-import Layer from 'ol/layer/WebGLTile.js';
+import {Vector as Layer} from 'ol/layer';
 import { useEffect } from 'react';
 import { useMapContext } from '../../hooks/useMapContext';
 import { useMap } from '../../hooks/useMap';
 
-const WebGLTile = ({ params }) => {
-    const { map } = useMapContext();
+
+
+const VectorLayer = (props) => {
+
+    const {map} = useMapContext();
     const { addLayer, removeLayer } = useMap(map);
 
     useEffect(() => {
         if (!map) return;
         const layer = new Layer({
-            ...params
+            ...props
         });
 
         addLayer(layer);
@@ -23,5 +26,5 @@ const WebGLTile = ({ params }) => {
 
 };
 
-export { WebGLTile };
+export default VectorLayer;
 

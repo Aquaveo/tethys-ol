@@ -1,11 +1,11 @@
-import React, { useEffect , useRef } from 'react';
+import React, { useEffect , useState, useRef } from 'react';
 import MapContext from '../contexts/MapContext';
 import { View, Map as OlMap } from 'ol';
 
 export const Map = ({ children, ...props}) => {
 
   const mapRef = useRef();
-  const [map, setMap] = React.useState(null);
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
     let options = {

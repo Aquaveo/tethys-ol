@@ -76,6 +76,31 @@ const LayerConfig = [
 
 // OverLay Config
 
+const OverLayConfig = [
+  {
+    props: {
+      id: "overlay-test",
+      autoPan: {
+        animation: {
+          duration: 250,
+        }
+      }
+    },
+    content: {
+      type: "PlotlyGraph",
+      props: {
+        data: [
+          {
+            x: [1, 2, 3, 4],
+            y: [10, 15, 13, 17],
+            type: 'scatter'
+          }
+        ]
+      }
+    }
+  }
+]
+
 
   
 

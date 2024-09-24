@@ -13,7 +13,7 @@ import {
 } from "./Config";
 
 import View from "../tethys-ol/components/View";
-
+import OverLayContentWrapper from "./OverlayContentWrapper";
 
 const PluginMap = () => {
     
@@ -45,7 +45,9 @@ const PluginMap = () => {
                     },
                   }}
             >
-                 <div>Your overlay content here</div>
+                <OverLayContentWrapper>
+                    <div>Your overlay content here</div>
+                </OverLayContentWrapper>
             </Overlay>
         </Overlays>
 

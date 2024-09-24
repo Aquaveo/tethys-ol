@@ -53,18 +53,26 @@ class MapEvents {
                     return
                 }
                 const gauge_id = response.data.features[0].attributes.gaugelid
+                // here make the gauge_id to change,
+                // this should go to another Component
+
                 const noaaApiUrl = `https://api.water.noaa.gov/nwps/v1/gauges/${gauge_id}/stageflow`;  // NOAA API endpoint
 
                 axios.get(noaaApiUrl)
                 .then((gaugeResponse) => {
                     console.log(gaugeResponse.data);
                     mapObject.getOverlayById('overlay-test').setPosition(clickCoordinate);
+                    const xValues = gaugeResponse.data.observed.map((point) => point.validTime);
+                    const primaryValues = gaugeResponse.data.observed.map((point) => point.primary);
+                    const secondaryValues = gaugeResponse.data.observed.map((point) => point.secondary);
+                    
                     // Process the gauge data here
                     // You can manipulate or save gaugeResponse.data depending on your need
                 })
                 .catch((error) => {
                     console.log('Error fetching gauge data:', error);
                 });
+                // end component 
 
                 
     

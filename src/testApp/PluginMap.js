@@ -18,6 +18,7 @@ import OverLayContentWrapper from "./OverlayContentWrapper";
 const PluginMap = () => {
     
   return (
+
     <Map {...MapConfig} >
         <View {...ViewConfig} />
         <Layers>
@@ -35,7 +36,6 @@ const PluginMap = () => {
             })}
         
         </Layers>
-        
         <Overlays>
             <Overlay
                   id= "overlay-test"
@@ -50,7 +50,6 @@ const PluginMap = () => {
                 </OverLayContentWrapper>
             </Overlay>
         </Overlays>
-
     </Map>
   );
 }
@@ -58,11 +57,21 @@ const PluginMap = () => {
 export default PluginMap
 
 
+// A Component made of the following:
+// A Plotly Component that takes in data, but it is pretty flexible: take data, layout, config, etc, look at what Corey did
+// A Parent component that uses the Plotly component, but triggers an API call to call the data,
+// We can look at this with LazyComponents, etc
+// We need a provider and a store with a reducer, we probably want to keep the structure of the response from the API call
 
+// The same will go for the Streams.
+// A couple fo questions:
+// How would intake do with async calls?
+// How would intake do with multiple async calls?
 
-// import { XYZArcGISSource, ImageArcGISRestSource } from '../tethys-ol/components/sources';
-// import {WebGLTile} from '../tethys-ol/components/layers/WebGLTile';
-// import {ImageLayerWrapper} from '../tethys-ol/components/layers/ImageLayer';
+// One More question:
+// Probably need to have a single WebSocket for all the components
+// check Corey's code for a possible WebSocket
+
 
 
 // we need also a component for turning on and off the layers
@@ -89,37 +98,3 @@ export default PluginMap
 // lib
 // components
 // providers
-
-
-
-
-
-
-// const GaugesArcgisLayerSource = ImageArcGISRestSource({
-//     url: 'https://mapservices.weather.noaa.gov/eventdriven/rest/services/water/riv_gauges/MapServer',
-//     params: {
-//         LAYERS:"show:0",
-//         layerDefs: JSON.stringify({"0":"status = 'action' or status='minor' or status='moderate' or status='major'"})
-//     }
-// })
-
-// const StreamArcgisLayerSource = ImageArcGISRestSource({
-//     url: 'https://mapservice.nohrsc.noaa.gov/arcgis/rest/services/national_water_model/NWM_Stream_Analysis/MapServer',
-//     params: {
-//         LAYERS:"show:0,7,14,21"
-//     }
-// })
-
-// const StaticFlowLines = ImageArcGISRestSource({
-//     url: 'https://maps.water.noaa.gov/server/rest/services/reference/static_nwm_flowlines/MapServer',
-//     params: {
-//         LAYERS:"show:0"
-//     }
-// })
-
-
-// const BaseMapLayerSource = XYZArcGISSource({
-//     url: 'https://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-//     attributions: 'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/</RMap>rest/services/World_Topo_Map/MapServer">ArcGIS</a>'
-// });
-

@@ -1,37 +1,39 @@
-import React, { useEffect, useRef } from 'react';
-import { Overlay } from 'ol';
+import { Overlay as OlOverlay } from 'ol';
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { useMapContext } from '../../hooks/useMapContext';
 
-const MapOverlay = ({ map, position, elementId, autoPan = true, stopEvent = true, className = 'ol-overlay-container' }) => {
-    const overlayRef = useRef(null);
+const Overlay = (props) => {
+  const { map } = useMapContext();  // Custom map context
+  const overlayRef = useRef(null);  // Ref to the DOM element
+  const olOverlayRef = useRef(null); // Ref to the OpenLayers Overlay instance
 
-    useEffect(() => {
-        if (!map) return;
+  useEffect(() => {
+    if (!map || !overlayRef.current) return;
 
-        // Create an OpenLayers overlay
-        const overlay = new Overlay({
-            element: document.getElementById(elementId),
-            autoPan: autoPan,
-            stopEvent: stopEvent,
-        });
+    // Create the OpenLayers Overlay
+    olOverlayRef.current = new OlOverlay({
+      element: overlayRef.current,
+      autoPan: props.autoPan,
+      id: props.id,  // Assign the ID here
+      // ... other props as needed
+    });
 
-        // Add the overlay to the map
-        map.addOverlay(overlay);
-        overlayRef.current = overlay;
+    map.addOverlay(olOverlayRef.current);
 
-        // Clean up overlay when component is unmounted
-        return () => {
-            map.removeOverlay(overlay);
-        };
-    }, [map, elementId, autoPan, stopEvent]);
+    // Cleanup function to remove the overlay from the map on unmount
+    return () => {
+      if (!map) return;
+      map.removeOverlay(olOverlayRef.current);
+    };
+  }, [map, overlayRef.current]);
 
-    useEffect(() => {
-        if (overlayRef.current && position) {
-            // Set the position of the overlay
-            overlayRef.current.setPosition(position);
-        }
-    }, [position]);
-
-    return null;
+  return createPortal(
+    <div id={props.id} className="modal-overlay" ref={overlayRef}>
+      {props.children}
+    </div>,
+    document.body // Render the overlay into the body or another container
+  );
 };
 
-export default MapOverlay;
+export default Overlay;

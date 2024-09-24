@@ -18,7 +18,7 @@ class MapEvents {
         let mapObject = event.map;
     
         let clickCoordinate = event.coordinate;
-    
+        
         const urlService = layer.getSource().getUrl() // collect mapServer URL
         const id = layer
             .getSource()
@@ -58,6 +58,7 @@ class MapEvents {
                 axios.get(noaaApiUrl)
                 .then((gaugeResponse) => {
                     console.log(gaugeResponse.data);
+                    mapObject.getOverlayById('overlay-test').setPosition(clickCoordinate);
                     // Process the gauge data here
                     // You can manipulate or save gaugeResponse.data depending on your need
                 })

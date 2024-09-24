@@ -4,7 +4,8 @@ import { Map } from "../tethys-ol/providers/Map";
 import Layer from "../tethys-ol/components/layers/Layer";
 import Source from "../tethys-ol/lib/Source";
 import Layers from "../tethys-ol/components/layers/Layers";
-
+import Overlay from "../tethys-ol/components/overlays/Overlay";
+import Overlays from "../tethys-ol/components/overlays/Overlays";
 import { 
     LayerConfig, 
     ViewConfig, 
@@ -17,13 +18,8 @@ import View from "../tethys-ol/components/View";
 const PluginMap = () => {
     
   return (
-    <Map
-        {...MapConfig}
-    >
-        <View
-            {...ViewConfig}
-        />
-
+    <Map {...MapConfig} >
+        <View {...ViewConfig} />
         <Layers>
             {LayerConfig.map((config, index) => {
                 const { type: LayerType, props: { source: { type: SourceType, props: sourceProps }, ...layerProps } } = config;
@@ -37,7 +33,22 @@ const PluginMap = () => {
                     />
                 );
             })}
+        
         </Layers>
+        
+        <Overlays>
+            <Overlay
+                  id= "overlay-test"
+                  element= {document.getElementById('test-id')}
+                  autoPan= {{
+                    animation: {
+                      duration: 250,
+                    },
+                  }}
+            >
+                 <div>Your overlay content here</div>
+            </Overlay>
+        </Overlays>
 
     </Map>
   );

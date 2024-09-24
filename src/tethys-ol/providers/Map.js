@@ -13,19 +13,6 @@ export const Map = ({ children, ...props}) => {
         center: [0, 0],
         zoom: 1,
       }),
-        // new View({
-        //   zoom: props.resolution === undefined ? props.zoom : undefined, 
-        //   center: props.center,
-        //   extent: props.extent,
-        //   resolution: props.resolution,
-        //   minResolution: props.minResolution,
-        //   maxResolution: props.maxResolution,
-        //   constrainResolution: props.constrainResolution,
-        //   minZoom: props.minZoom,
-        //   maxZoom: props.maxZoom,
-        //   enableRotation: props.enableRotation,
-        //   constrainRotation: props.constrainRotation
-        // }),
       layers: [],
       controls: [],
       overlays: []

@@ -39,7 +39,6 @@ const PluginMap = () => {
         <Overlays>
             <Overlay
                   id= "overlay-test"
-                  element= {document.getElementById('test-id')}
                   autoPan= {{
                     animation: {
                       duration: 250,
